@@ -1,24 +1,57 @@
-create database bd2;
-use bd2;
+drop database bd2exercicios;
+create database bd2exercicios;
+use bd2exercicios;
 
-create table categorias (
-	ID int(11) primary key auto_increment,
-    nome varchar(255) not null
+create table usuarios (
+	id int primary key auto_increment,
+    nome varchar(255) not null,
+    email varchar(255) not null,
+    senha varchar(70) not null,
+    perfil varchar(255) not null
+);
+SELECT SHA2('abc', 224);
+
+insert into usuarios (nome, email, senha, perfil) values (
+"André Neves", 
+"andr@andr.com.br", 
+SHA2('123456789', 256), 
+"desenvolvedor"
 );
 
-insert into categorias (nome) values ("Livro");
-insert into categorias (nome) values ("Revistas");
+insert into usuarios (nome, email, senha, perfil) values (
+"Luciene", 
+"lu@lu.com.br", 
+SHA2('987654321', 256), 
+"administrador"
+);
 
-select * from categorias;
+insert into usuarios (nome, email, senha, perfil) values (
+"Ana", 
+"ana@ana.com.br", 
+SHA2('989898989', 256), 
+"gerente"
+);
 
-insert into categorias (id, nome) values("52", "Clara");
+select * from usuarios;
 
-select auto_increment from information_schema.tables
-where table_name = "categorias" and table_schema = "bd2";
+create table carro (
+  id int(11) primary key auto_increment,
+  nome varchar(200) not null,
+  valor int(11),
+  endereco varchar(255)
+);
 
-rename table categorias to tipos;
+rename table carro to carros;
 
-select * from tipos;
 
--- deletar tabela
-drop database tipos;
+alter table carros
+modify column valor float;
+
+alter table carros 
+drop column endereco;
+
+alter table carros
+add column observacao text(255);
+
+
+select * from carros;
